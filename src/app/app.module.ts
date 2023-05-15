@@ -14,6 +14,10 @@ import {FlexLayoutModule, FlexModule} from "@angular/flex-layout";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import {environment} from "../environments/environment";
+
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import {HttpClientModule} from "@angular/common/http";
     AboutComponent,
   ],
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,

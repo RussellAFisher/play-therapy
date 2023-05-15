@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiService} from "../../services/api.service";
+import {doc, Firestore, setDoc} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +9,6 @@ import {ApiService} from "../../services/api.service";
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent {
-
   /**
    * Contact form group
    *
@@ -37,7 +37,7 @@ export class ContactComponent {
     {name: 'Other', value: 'other'}
   ];
 
-  constructor(private _apiService: ApiService) {
+  constructor(private _apiService: ApiService, private _firestore: Firestore) {
   }
 
   /**
@@ -53,6 +53,10 @@ export class ContactComponent {
    * Submit contact info
    */
   submitContact(): void {
-    console.log(this.contactFormGroup.value);
+    const submitDoc = doc(this._firestore, `form-data/${this.contactFormGroup.get('emailAddress1')!.value}`);
+
+    setDoc(submitDoc, this.contactFormGroup.value).then((res) => {
+      console.log('submitted', res);
+    });
   }
 }
