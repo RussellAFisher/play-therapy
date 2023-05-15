@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'app-contact',
@@ -24,21 +25,33 @@ export class ContactComponent {
     clientDescription: new FormControl('', [Validators.required, Validators.maxLength(300)])
   });
 
-  maritalStatusOptions: {name: string, value: string}[] = [
+  /**
+   * Marital status options
+   *
+   * @type {name: string, value: string}[]
+   */
+  maritalStatusOptions: { name: string, value: string }[] = [
     {name: 'Married or Together', value: 'married/together'},
     {name: 'Divorced or Seperated', value: 'divorced/seperated'},
     {name: 'Single', value: 'single'},
     {name: 'Other', value: 'other'}
-  ]
+  ];
+
+  constructor(private _apiService: ApiService) {
+  }
 
   /**
    * Client description length
+   *
+   * @return number | null
    */
-  get clientDescriptionLength(): number | null
-  {
+  get clientDescriptionLength(): number | null {
     return this.contactFormGroup.get('clientDescription')?.value?.length;
   }
 
+  /**
+   * Submit contact info
+   */
   submitContact(): void {
     console.log(this.contactFormGroup.value);
   }

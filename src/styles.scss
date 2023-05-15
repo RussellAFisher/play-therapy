@@ -1,1 +1,102 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+$forest-palette: (
+  50: #e8f1e8,
+  100: #c7dcc7,
+  200: #a5c5a4,
+  300: #84b082,
+  400: #6ea16a,
+  500: #55934f,
+  600: #4c8547,
+  700: #42743d,
+  800: #386433,
+  900: #254622,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: white,
+  )
+);
+
+$sky-palette: (
+  50: #e0f1fb,
+  100: #b2ddf7,
+  200: #7fc7f2,
+  300: #43b1ee,
+  400: #00a1ec,
+  500: #0092ea,
+  600: #0084dd,
+  700: #0073cb,
+  800: #0062ba,
+  900: #00459d,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$tomato-palette: (
+  50: #f8e7e6,
+  100: #f9c8bb,
+  200: #f5a48f,
+  300: #f28164,
+  400: #f06643,
+  500: #ee4a25,
+  600: #e34521,
+  700: #d63e1c,
+  800: #c83819,
+  900: #af2b10,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$forestsky-primary: mat.define-palette($forest-palette, 700, 300, 900);
+$forestsky-accent: mat.define-palette($sky-palette, 300, 100, 700);
+$forestsky-warn: mat.define-palette($tomato-palette, 800);
+
+$forestsky-theme: mat.define-light-theme((
+  color: (
+    primary: $forestsky-primary,
+    accent: $forestsky-accent,
+    warn: $forestsky-warn,
+  )
+));
+
+@include mat.all-component-themes($forestsky-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
