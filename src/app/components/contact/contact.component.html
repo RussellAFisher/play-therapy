@@ -1,0 +1,78 @@
+<mat-card id="ContactForm">
+  <form [formGroup]="contactFormGroup" (submit)="submitContact()">
+    <mat-card-content>
+      <div id="ContactFormDescription" fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="95">
+          We are currently in the process of building out a new office in West Denver, if you are interested in getting on our wait list please fill out the form below and we will reach out to you as soon as we are able.
+        </div>
+      </div>
+      <div id="GuardianNames" fxLayout="row wrap" fxLayoutAlign="space-around">
+        <div fxFlex.lt-md="95" fxFlex="45">
+          <mat-form-field>
+            <mat-label>Primary Guardian Name</mat-label>
+            <input matInput type="text" formControlName="guardianName1" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex.lt-md="95" fxFlex="45">
+          <mat-form-field>
+            <mat-label>Secondary Guardian Name</mat-label>
+            <input matInput type="text" formControlName="guardianName2">
+          </mat-form-field>
+        </div>
+      </div>
+      <div id="GuardianEmails" fxLayout="row wrap" fxLayoutAlign="space-around">
+        <div fxFlex.lt-md="95" fxFlex="45">
+          <mat-form-field>
+            <mat-label>Primary Guardian Email</mat-label>
+            <input matInput type="email" formControlName="emailAddress1" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex.lt-md="95" fxFlex="45">
+          <mat-form-field>
+            <mat-label>Secondary Guardian Email</mat-label>
+            <input matInput type="email" formControlName="emailAddress2">
+          </mat-form-field>
+        </div>
+      </div>
+      <div id="GuardianPhoneNumbers" fxLayout="row wrap" fxLayoutAlign="space-around">
+        <div fxFlex.lt-md="95" fxFlex="45">
+          <mat-form-field>
+            <mat-label>Primary Guardian Phone Number</mat-label>
+            <input matInput type="text" formControlName="phoneNumber1" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex.lt-md="95" fxFlex="45">
+          <mat-form-field>
+            <mat-label>Secondary Guardian Phone Number</mat-label>
+            <input matInput type="text" formControlName="phoneNumber2">
+          </mat-form-field>
+        </div>
+      </div>
+      <div id="MaritalStatus" fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="95">
+          <mat-label class="marital-status-label">Marital Status*</mat-label>
+          <mat-radio-group [ngClass.lt-md]="'marital-status-column'" class="marital-status" formControlName="maritalStatus" aria-label="Marital Status" required>
+            <mat-radio-button *ngFor="let maritalStatus of maritalStatusOptions"
+                              value="{{maritalStatus.value}}">{{maritalStatus.name}}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div id="ClientDescription" fxLayout="row" fxLayoutAlign="space-around">
+        <div fxFlex="95">
+          <mat-form-field>
+            <mat-label>Child name and reason you are seeking therapy at this time?</mat-label>
+            <textarea class="client-description" matInput formControlName="clientDescription" maxlength="300"></textarea>
+            <mat-hint align="end">{{clientDescriptionLength}} / 300</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button class="contact-submit-button"
+              [ngClass]="contactFormGroup.valid && contactFormGroup.touched ? 'button-enabled-color' : ''"
+              id="SignupSubmitButton" [disabled]="contactFormGroup.invalid || contactFormGroup.pristine">
+        Submit Info
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
